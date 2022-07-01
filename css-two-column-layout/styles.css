@@ -1,0 +1,32 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-one-fourth {
+  flex-basis: 25%;
+}
+
+.column-one-fifth {
+  flex-basis: calc(100% / 5);
+}
+
+.column-four-fifths {
+  flex-basis: calc(400% / 5);
+}
+
+body {
+  font-family: Karla, monospace;
+}
