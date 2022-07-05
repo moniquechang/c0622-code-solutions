@@ -1,0 +1,212 @@
+.container {
+  width: 65%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-half {
+  flex-basis: 50%;
+}
+
+.column-one-fourth {
+  flex-basis: 25%;
+}
+
+.column-three-fourths {
+  flex-basis: 75%;
+}
+
+.light-background-row-color {
+  background-color: #fafafa;
+}
+
+.dark-background-row-color {
+  background-color: #525351;
+}
+
+.white-color-text {
+  color: white;
+}
+
+.dark-color-text {
+  color: #6e6e6e;
+}
+
+.font-tiempos {
+  font-family: "Tiempos Headline", serif;
+}
+
+.align-center {
+  align-items: center;
+}
+
+body {
+  font-family: Avenir, sans-serif;
+}
+
+.display-header {
+  color: #a9a9a9;
+  font-size: 13px;
+  border-bottom: 1px solid #eceff1;
+}
+
+.blue-logo-img {
+  width: 110px;
+  margin: 30px 0 15px 70px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 70px 15px 0;
+}
+
+.contact-button {
+  font-family: Avenir, sans-serif;
+  background-color: #294463;
+  border: none;
+  border-radius: 3px;
+  font-size: 13px;
+  padding: 10px 15px;
+}
+
+.hero-image {
+  background-image: url("images/hero.jpg");
+  background-size: cover;
+  height: 420px;
+  margin: 50px 70px;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  background: linear-gradient(transparent, rgb(67 67 67 / 75%));
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+
+.hero-caption {
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  font-weight: normal;
+  padding-right: 270px;
+}
+
+.hero-text {
+  position: absolute;
+  top: 140px;
+  left: 50px;
+  font-size: 12px;
+  line-height: 22px;
+  padding-right: 360px;
+}
+
+.hero-button {
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
+}
+
+.display-prefer {
+  text-align: center;
+}
+
+.prefer-caption {
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.prefer-text {
+  font-size: 13px;
+  line-height: 22px;
+  padding: 0 270px;
+}
+
+.display-clinics {
+  text-align: center;
+  line-height: 30px;
+}
+
+.clinics-right {
+  margin: 40px 50px 80px 0;
+  padding-left: 20px;
+}
+
+.clinics-left {
+  margin: 40px 0 80px 60px;
+  padding-right: 30px;
+}
+
+.display-ready-column {
+  margin-left: 70px;
+}
+
+.ready-text {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.schedule-text {
+  font-size: 13px;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
+
+.display-button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 70px;
+}
+
+.started-button {
+  font-family: Avenir, sans-serif;
+  background-color: #294463;
+  border: none;
+  border-radius: 3px;
+  padding: 10px 30px;
+}
+
+.display-address {
+  font-size: 13px;
+  line-height: 20px;
+  padding-top: 80px;
+  padding-bottom: 100px;
+  margin-left: 70px;
+}
+
+.white-logo-img {
+  width: 110px;
+  margin-bottom: 20px;
+}
+
+.display-lists {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lists {
+  list-style: none;
+  line-height: 32px;
+  margin-top: 60px;
+  padding-right: 120px;
+  padding-left: 0;
+}
+
+.display-footer {
+  padding: 40px;
+  font-size: 14px;
+}
+
+.footer {
+  padding-left: 30px;
+}
