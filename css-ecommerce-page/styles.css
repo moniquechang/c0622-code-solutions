@@ -1,0 +1,42 @@
+.container {
+  width: 80%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-one-fifth {
+  flex-basis: 20%;
+}
+
+body {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+img {
+  width: 90%;
+  height: 80%;
+  object-fit: cover;
+}
+
+p {
+  color: #dcdcdc;
+}
+
+span {
+  color: black;
+}
+
+.price {
+  background-color: #fff1e7;
+}
