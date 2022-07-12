@@ -1,0 +1,42 @@
+.container {
+  margin: auto;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-display {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin: 18% 0;
+  padding: 10%;
+  border-radius: 50%;
+  border: none;
+}
+
+.on {
+  background-color: rgb(253 249 242);
+}
+
+.button-on {
+  background-color: rgb(247 234 146);
+  box-shadow: 0 10px 20px 10px rgb(252 243 200);
+}
+
+.off {
+  background-color: rgb(17 17 17);
+}
+
+.button-off {
+  background-color: rgb(37 37 37);
+  box-shadow: 0 -10px 20px 15px rgb(12 12 12);
+}
