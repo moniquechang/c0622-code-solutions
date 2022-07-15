@@ -1,0 +1,44 @@
+.container {
+  width: 100%;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.column-display {
+  display: flex;
+  justify-content: center;
+}
+
+body {
+  font-family: monospace;
+}
+
+h1 {
+  margin: 25% 0;
+  font-size: 32px;
+}
+
+span {
+  white-space: pre;
+}
+
+.standby {
+  border-bottom: 3px solid black;
+}
+
+.correct {
+  color: rgb(96 201 66);
+  border-bottom: none;
+}
+
+.incorrect {
+  color: rgb(228 50 36);
+  border-bottom: 3px solid rgb(228 50 36);
+}
