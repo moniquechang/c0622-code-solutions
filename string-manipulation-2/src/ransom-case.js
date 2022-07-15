@@ -1,24 +1,24 @@
 /* exported ransomCase */
 
-/*
+/* function declaration with parameter: string (a string)
+   variable declaration for an empty string (finalString)
+   for loop where i is index/position for letters of string parameter
+     (i = 0, i < string.length, i++)
+   if statement where if i is even (divisible by 2) string[i] is made lowercase
+     and added to finalString variable (using +=)
+   else statement where if i is odd, to make string[i] uppercase and concatenate
+     to finalString variable (using +=)
+   return finalString from function after loop ends
+*/
+
 function ransomCase(string) {
   var finalString = '';
   for (var i = 0; i < string.length; i++) {
     if (i % 2 === 0) {
-      string[i].toLowerCase();
+      finalString += string[i].toLowerCase();
     } else {
-      string[i].toUpperCase();
+      finalString += string[i].toUpperCase();
     }
-    finalString += string[i];
   }
   return finalString;
-}
-*/
-
-function ransomCase(string) {
-  var newString = string.toUpperCase();
-  for (var i = 0; i < string.length; i + 2) {
-    newString[i].toLowerCase();
-  }
-  return newString;
 }
