@@ -62,7 +62,7 @@ app.delete('/api/notes/:id', (req, res) => {
         const resMessage = { error: 'An unexpected error occurred.' };
         res.status(500).json(resMessage);
       } else {
-        res.status(204);
+        res.sendStatus(204);
       }
     });
   }
