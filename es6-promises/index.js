@@ -6,6 +6,6 @@ promiseObj.then(value => {
   console.log(value);
 });
 
-promiseObj.catch(Error => {
-  console.log(Error.message);
+promiseObj.catch(error => {
+  console.log(error.message);
 });
