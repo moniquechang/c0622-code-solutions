@@ -1,0 +1,43 @@
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  border: 0.2rem solid black;
+  box-shadow: 0.2rem 0.2rem black;
+  font-size: 1rem;
+  padding: 0.6rem 1.3rem;
+}
+
+.three {
+  color: white;
+  background-color: rgb(49 32 112);
+}
+
+.six {
+  color: white;
+  background-color: rgb(98 81 162);
+}
+
+.nine {
+  color: white;
+  background-color: rgb(209 109 106);
+}
+
+.twelve {
+  color: black;
+  background-color: rgb(236 180 118);
+}
+
+.fifteen {
+  color: black;
+  background-color: rgb(255 254 84);
+}
+
+.eighteen {
+  color: black;
+  background-color: white;
+}
