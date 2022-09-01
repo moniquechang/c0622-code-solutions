@@ -24,12 +24,12 @@ class RegistrationForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
+    console.log('state:', this.state);
   }
 
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <label>
           Username
           <input type="text" value={this.state.username} onChange={this.handleUsernameChange}></input>
@@ -38,7 +38,7 @@ class RegistrationForm extends React.Component {
           Password
           <input type="password" value={this.state.password} onChange={this.handlePasswordChange}></input>
         </label>
-        <button onClick={this.handleSubmit}>Sign Up</button>
+        <button>Sign Up</button>
       </form>
     );
   }
