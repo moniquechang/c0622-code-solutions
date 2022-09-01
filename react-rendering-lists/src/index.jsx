@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-function PokedexList() {
+function PokedexList(props) {
+  const pokedex = props.pokedex;
   const listItems = pokedex.map(x =>
     <li key={x.number}>
       {x.name}
@@ -22,4 +23,4 @@ const pokedex = [
 const container = document.querySelector('#root');
 const root = ReactDOM.createRoot(container);
 
-root.render(<PokedexList />);
+root.render(<PokedexList pokedex={pokedex} />);
