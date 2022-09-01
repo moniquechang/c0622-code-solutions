@@ -1,0 +1,22 @@
+#root {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.circle {
+  border: 0.3rem solid black;
+  border-radius: 50%;
+}
+
+p {
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 3rem 3.5rem;
+}
+
+i {
+  font-size: 2rem;
+  margin-top: 1rem;
+}
