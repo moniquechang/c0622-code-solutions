@@ -1,0 +1,27 @@
+form {
+  font-family: sans-serif;
+}
+
+label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+i {
+  margin-left: 0.5rem;
+  font-size: 1.4rem;
+  vertical-align: middle;
+}
+
+.fa-xmark {
+  color: rgb(207 70 53);
+}
+
+.fa-check {
+  color: rgb(121 165 90);
+}
+
+p {
+  font-size: 0.8rem;
+  color: rgb(207 70 53);
+}
