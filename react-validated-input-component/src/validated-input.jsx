@@ -15,32 +15,26 @@ export default class ValidatedInput extends React.Component {
   }
 
   render() {
-    if (!this.state.value) {
-      return (
-        <form>
-          <label htmlFor="password">Password</label>
-          <input type="password" value={this.state.value} id="password" onChange={this.handleChange} />
-            <i className="fa-solid fa-xmark"></i>
-            <p>A password is required.</p>
-        </form>
-      );
-    } else if (this.state.value.length < 8) {
-      return (
-        <form>
-          <label htmlFor="password">Password</label>
-          <input type="password" value={this.state.value} id="password" onChange={this.handleChange} />
-            <i className="fa-solid fa-xmark"></i>
-            <p>Your password is too short.</p>
-        </form>
-      );
+    const inputValue = this.state.value;
+    let warningText;
+    let icon;
+    if (!inputValue) {
+      warningText = 'A password is required.';
+      icon = 'fa-solid fa-xmark';
+    } else if (inputValue.length < 8) {
+      warningText = 'Your password is too short.';
+      icon = 'fa-solid fa-xmark';
     } else {
-      return (
-        <form>
-          <label htmlFor="password">Password</label>
-          <input type="password" value={this.state.value} id="password" onChange={this.handleChange} />
-            <i className="fa-solid fa-check"></i>
-        </form>
-      );
+      warningText = '';
+      icon = 'fa-solid fa-check';
     }
+    return (
+      <form>
+        <label htmlFor="password">Password</label>
+        <input type="password" value={this.state.value} id="password" onChange={this.handleChange} />
+        <i className={icon}></i>
+        <p>{warningText}</p>
+      </form>
+    );
   }
 }
