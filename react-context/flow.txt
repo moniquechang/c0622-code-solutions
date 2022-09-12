@@ -1,0 +1,325 @@
+User can sign up:
+
+Browser sends get request to server for html document (server/public/index.html)
+Html file is loaded in browser => gets to script tag for main.js
+  ‘dev’ script in package.json runs server/index.js in development mode
+  In index.js in development mode, the devMiddleware function in the Dev-middleware.js file uses webpack to create main.js
+Browser receives main.js and starts to execute client/index.jsx (front-end code)
+<div> with id of ‘root’ is grabbed from the index.html document
+A react root is created using the <div> from the html document
+Component named App is mounted on this react root which starts the App application lifecycle (client/app.jsx)
+App is called with the new operator
+  Constructor method is called
+    super function called with one argument: props
+    Initial state is set
+      user: null
+      isAuthorizing: true
+      route: parseRoute(window.location.hash)
+        See **parseRoute() at bottom
+    ‘this’ is bound to the methods handleSignIn and handleSignOut using bind()
+  render method is called
+    First, an if statement with the condition: “if the state ‘isAuthorizing’ (set in the constructor method) is true, return null” is stated
+    Because the current state of ‘isAuthorizing’ is true and this matches the condition, render method is returned with the value null
+  componentDidMount method is called
+    An event listener, hashchange is added to the window object where
+      The ‘route’ state is set to parseRoute(window.location.hash) using setState()
+    The value of ‘react-content-jwt’ is retrieved from local storage and assigned to a variable named token
+    If the value of the variable token is truthy, it is decoded and the value is assigned to the variable user
+      If the value of the variable token is falsy, the value null is assigned to the variable user
+    The ‘user’ state is set to the value of the variable user (using setState)
+    The ‘isAuthorizing’ state is set to the boolean value false (using setState)
+  The setState() of componentDidMount triggers a rerender of the render method
+  render method is called
+    First, an if statement with the condition: “if the state ‘isAuthorizing’ is true, return null” is stated
+    Because the current state of ‘isAuthorizing’ is false, it doesn't fulfill the condition of the if statement and moves on w/o executing the if statement code block
+    The ‘user’ and ‘route’ states are destructured from the state object and assigned to the variables, ‘user’ and ‘state’
+    ‘handleSignIn’ and ‘handleSignOut’ methods are destructures from the App component and assigned to the variables, ‘handleSignIn’ and ‘handleSignOut’
+    An object literal with the values of the variables user, reroute, handleSignIn, and handleSignOut is assigned to the variable contextValue
+  Return statement
+    Provider react component for the context object named AppContext with the prop named value with the value of the variable contextValue
+      AppContext is created in the client/lib/app-context.js (is imported at the top of client/app.jsx
+      Context objects read the current context value from the closest matching Provider
+        So AppContext context value is the contextValue variable
+      React fragment
+        React element named Navbar
+          See **Navbar at bottom
+          Because the value of ‘user’ is null as of now, then two anchor tags, one with the text ‘Sign In’ and one named ‘Sign Up’, are returned
+        React element named PageContainer
+          See **PageContainer
+          renderPage method is called as a child
+  renderPage method is called
+    See **renderPage() at bottom
+    Because the path right now is equal to ‘sign-in’, react element named Auth is returned
+      See **Auth at bottom
+      Because route.path is equal to ‘sign-in’, welcomeMessage “Please sign in to continue” is rendered
+      React element AuthForm is returned
+        see **AuthForm at bottom
+        route.path is 'sign-in' in this case so
+          alternateActionHref is '#sign-up'
+          alternatActionText is 'Register now'
+          submitButtonText is 'Log In'
+User is trying to sign up, so needs to click either 'Sign Up' anchor on right side of nav bar or the 'Register now' anchor on auth form
+when user clicks either anchor, this triggers a hashchange event where the hash is '#sign-up'
+  this resets the route property of state object to parseRoute(window.location.hash) using setState()
+    hash is now '#sign-up'
+  a setState triggers another render so render method is called
+render method is called (on client/app.jsx)
+  First, an if statement with the condition: “if the state ‘isAuthorizing’ is true, return null” is stated
+  Because the current state of ‘isAuthorizing’ is false, it doesn't fulfill the condition of the if statement and moves on w/o executing the if statement code block
+  The ‘user’ and ‘route’ states are destructured from the state object and assigned to the variables, ‘user’ and ‘state’
+  ‘handleSignIn’ and ‘handleSignOut’ methods are destructures from the App component and assigned to the variables, ‘handleSignIn’ and ‘handleSignOut’
+  An object literal with the values of the variables user, reroute, handleSignIn, and handleSignOut is assigned to the variable contextValue
+  Return statement
+    Provider react component for the context object named AppContext with the prop named value with the value of the variable contextValue
+      AppContext is created in the client/lib/app-context.js (is imported at the top of client/app.jsx
+      Context objects read the current context value from the closest matching Provider
+        So AppContext context value is the contextValue variable
+      React fragment
+        React element named Navbar
+          See **Navbar at bottom
+          Because the value of ‘user’ is null as of now, then two anchor tags, one with the text ‘Sign In’ and one named ‘Sign Up’, are returned
+        React element named PageContainer
+          See **PageContainer
+          renderPage method is called as a child
+  renderPage method is called
+    See **renderPage() at bottom
+    Because the path right now is equal to ‘sign-up’, react element named Auth is returned
+      See **Auth at bottom
+      Because route.path is equal to ‘sign-up’, welcomeMessage 'Create an account to get started!' is rendered
+      React element AuthForm is returned
+        see **AuthForm at bottom
+        route.path is 'sign-up' in this case so
+          alternateActionHref is '#sign-in'
+          alternatActionText is 'Sign in instead'
+          submitButtonText is 'Register'
+user has to type a username and password into form
+handleChange event is triggered everytime a key is typed for both of the above inputs
+  the 'name' and 'value' of the event.target are destructured
+  setState is called where the propety is the value of 'name' and the value is the value of 'value'
+    so for username => username : "what user types"
+    for password => passoword: "what usertypes"
+  this setState triggers a rerender of render method of AuthForm as stated in above sections
+user has to click "Register" button on auth form which submits the form
+form element has a onSubmit prop with the handleSubmit method that gets triggered when form is submitted
+  preventDefault method is called
+  'action' is destructured from props (is 'sign-up')
+  a fetch request is sent to the server for filepath named `/api/auth/${action}`
+    post method
+    json content type
+    and the req body is a JSON stringified state object
+server/index.js receives fetch request and finds the route that matches the method and filepath of fetch request
+  'username' and 'password' are destructured from req.body
+  if either one of these do not exist, a ClientError is created using new operator and the server/public/error-middleware.js
+    the error num is 400, with text 'username and password are required fields'
+  since 'username' and 'password' were just created, these error is not thrown
+  the 'password' is hashed using argon2
+    then, sql code where 'username' and 'hashedpassword' values are inserted into the 'users' table of database is assigned to a variable named sql
+      the database is queried using db.query(), with the sql code and its params as arguments
+        actual values of the username and hashedpassword are assigned to a separate varaible named params for security reasons
+    then, the userId, username, and createAt values of newly created user are retured to client/components/auth-form.jsx along with response num 201
+back to fetch request of client/components/auth-form.jsx
+  then, response from server goes back to fetch request and is parsed
+  then, if the 'action' was equal to "sign-up', window.location.hash is changed to 'sign-in'
+    this triggers a hashchange which resets the route property of state object to parseRoute(window.location.hash) using setState()
+    hash is now '#sign-in'
+    a setState triggers another render so render method is called again like stated above
+      re render of client/app.jsx -> renderPage is called -> path is 'sign-in' so react element Auth is returned -> AuthForm is returned
+
+
+User can sign in:
+
+sign up process has resulted in being on sign in page (hash is #sign-in)
+user has to type their username and password into form
+handleChange event is triggered everytime a key is typed for both of the above inputs
+  the 'name' and 'value' of the event.target are destructured
+  setState is called where the propety is the value of 'name' and the value is the value of 'value'
+    so for username => username : "what user types"
+    for password => passoword: "what usertypes"
+  this setState triggers a rerender of render method of AuthForm as stated in above sections
+user has to click "Log In" button on auth form which submits the form
+form element has a onSubmit prop with the handleSubmit method that gets triggered when form is submitted
+  preventDefault method is called
+  'action' is destructured from props (is 'sign-in')
+  a fetch request is sent to the server for filepath named `/api/auth/${action}`
+    post method
+    json content type
+    and the req body is a JSON stringified state object
+server/index.js receives fetch request and finds the route that matches the method and filepath of fetch request
+  'username' and 'password' are destructured from req.body
+  if either one of these do not exist, a ClientError is created using new operator and the server/public/error-middleware.js
+    the error num is 401, with text 'invalid login'
+  since 'username' and 'password' exists, these error is not thrown
+  sql code where 'userId' and 'hashedPassword' values are selected from the user with the 'username' from req.body is assigned to a variable named sql
+  the database is queried using db.query(), with the sql code and its params as arguments
+    actual value of the username is assigned to a separate varaible named params for security reasons
+    then, db.query results are assinged to variable 'user'
+      if no user, a ClientError is created using new operator and the server/public/error-middleware.js
+        error num is 401 and text is 'invalid login'
+      if no error is thrown, the 'userId' and 'hashedPassword' from user is destructured
+      the hashedPassword and password values are verified against each other using argon2
+      then,
+        if not matching -> new ClientError where error num is 401, text is 'invalid login'
+        if matching -> 'userId' and 'username' in an obj literal are assigned to variable 'payload'
+          'payload' is signed with the 'TOKEN_SECRET' (found in process.env) with jwt.sign()
+          object literal including token: token, user: payload is returned to fetch request
+back to fetch request of client/components/auth-form.jsx
+  then, response from server goes back to fetch request and is parsed
+  then, if the 'action' was equal to "sign-up', window.location.hash is changed to 'sign-in'
+    this does not happen in this case like that of 'sign-up'!
+    else if user and token exist from request results, onSignIn is called with the value of the results as argument
+onSignIn prop has value of handleSignIn method (on auth.jsx)
+this means handleSignIn is called with the argument value of the variable 'result' from auth-form
+  go back to client/app.jsx where handleSignIn is defined
+  user and token from 'result' is destructured
+  in local storage, item, 'react-content-jwt', is set with the value of the variable token
+  value of variable 'user' is set for the 'user' property in state obj with setState() which triggers re render of render method
+render method is called (client.app.jsx)
+  Navbar now has one button on right side 'Sign Out' with signout icon
+  renderPage() -> path === 'sign-in' so -> Auth
+  user is now not null, so react element Redirect is called with prop 'to' with a value of empty string
+    go to client/component/redirect.jsx
+    URL function is called w/ new operator and arguement of 'window.location' -> is assigned to variable 'url'
+    if prop.to === empty string (like this case)
+      '#' is assigned to the url.hash
+    location of window object is replaced with the value of url
+    null is returned
+    this is a hashchange and triggers rerender of render method of app.jsx
+render method is called (client.app.jsx)
+  Navbar now has one button on right side 'Sign Out' with signout icon
+  renderPage() -> path === '' so react element Home is returned
+go to client/pages.home.jsx
+  Home is called with the new operator
+    render method
+      a page with a gif is returned
+
+
+User can stay signed in (even if they refresh the page):
+
+if user clicks refresh, client/app.jsx is rendered again from top to bottom
+goes through same process as the beginning of sign-up, up to the beginning of componentDidMount
+  hashchange event listener is added, same as above
+  'react-content-jwt' is retrieved from local storage and assigned to variable token
+  token is decoded and the result is assigned to variable user
+  setState is called where value of 'user' is the user variable above, and isAuthorizing is set to false
+  setState triggers re render of render method
+render method
+  Navbar has one button on right side 'Sign Out' with signout icon (b/c value of user is not null)
+  renderPage()
+path is '' from before so Home is returned like that above
+
+
+User can sign out:
+user clicks 'sign out' button on right side of navbar
+there is an onClick method on this button with the value of handleSignOut
+handleSignOut is called (defined on app.jsx)
+go to client/app.jsx
+  'react-content-jsx' is removed from local storage
+  setState is called where user is given value of null
+  this setState triggers rerender of render method
+render method is called
+  Navbar -> Because the value of ‘user’ is null, then two anchor tags, one with the text ‘Sign In’ and one named ‘Sign Up’, are returned
+  renderPage()
+path is '' so Home is returned
+  since user is null, Redirect is returned with prop 'to' with value of 'sign-in'
+go to Redirect like stated above
+  this time, props.to is not equal to '#'
+    so url.hash is given the value of props.to, which is 'sign-in'
+    location of window object is replaced with the value of url
+    null is returned
+    this is a hashchange and triggers rerender of render method of app.jsx
+render method is called one more time (client.app.jsx)
+  Navbar -> Because the value of ‘user’ is null, then two anchor tags, one with the text ‘Sign In’ and one named ‘Sign Up’, are returned
+  renderPage()
+path is now 'sign-in' so Auth is returned
+Auth -> AuthForm returned where action is equal to 'sign-in' (like written in above sections)
+so at the end, user ends up on sign in page
+
+
+** parseRoute()
+Method takes a argument named hashRoute
+If statement where if the hashRoute starts with ‘#’, replaces it with ‘’
+The hashRoute is split where the ‘?’
+  part of the hashRoute before ‘?’ is assigned to variable named path
+  part of the hashRoute after ‘?’ is assigned to variable named queryString
+URLSearchParams function is called with new operator and takes the argument of the queryString variable
+  The return is assigned to variable named params
+  Params consists of key/value pairs that were in the queryString (way to take these key/value pairs out of queryString instead of doing string manipulation)
+‘path’ and ‘params’ are returned
+
+**renderPage()
+renderPage method is called
+  ‘path’ is destructured from the ‘route’ of state object
+  If path is strictly equal to an empty string, react element named Home is returned
+  If path is strictly equal to ‘sign-in’ or ‘sign-up’ then react element named Auth is returned
+  If path does not match any of these, react element named NotFound is returned
+
+**Navbar
+Goes to client/components/navbar.jsx
+Class Navbar is called w/ new operator
+Render method is called
+  ‘User’ and ‘handleSignout’ are destructured from AppContext
+  Navbar has a contextType property of AppContext
+  contextType lets you consume the nearest current value of that Context type using this.context
+  So Navbar is able to use info in the contextValue variable of AppContext
+Return statement
+  A black, rectangle navigation bar on top of the page is returned
+  Left side of nav bar there is a anchor tag consisting of a lightening bolt icon and the app name, AwesomeApp that is returned
+    href prop value is ‘#’
+  Right side of nav bar there are two javascript expressions to be returned
+    If the value of ‘user’ is not null then a button with the text ‘Sign out’ and a signout icon is returned
+      Button has onClick prop with value of  a JS expression of handleSignOut method
+    If the value of ‘user’ is null then two anchor tags, one with the text ‘Sign In’ and one named ‘Sign Up’, are returned
+      Sign-in anchor has href prop of ‘#sign-in’
+      Sign-up anchor has href prop of ‘#sign-up’
+
+**PageContainer
+Goes to client/components/page-container.jsx
+Function ‘PageContainer’ is called
+  Returns container divs that hold contents of each page/view
+
+**Auth
+Goes to client/pages/auth.jsx
+Class AuthPage is called with new operator
+Render method is called
+  ‘user’, ‘route’, and ‘handleSignout’ are destructured from AppContext
+    AuthPage has a contextType property of AppContext
+    contextType lets you consume the nearest current value of that Context type using this.context
+    So AuthPage is able to use info in the contextValue variable of AppContext
+  If statement where if value of user is true, return react element named Redirect with prop named ‘to’ with value “”
+  If statement where if route.path is strictly equal to ‘sign-in’ then string 'Please sign in to continue' is assigned to variable named welcomeMessage
+    If not, then string 'Create an account to get started!' is assigned to welcomeMessage
+  Return statement
+    React element type h2 with text ‘Awesome App’ along with lightening bolt icon is returned
+    React element type p with child JS expression of welcomeMessage is returned
+    react element AuthForm is returned with props:
+      key = route.path
+      action = route.path
+      onSignIn = handleSignIn
+
+**AuthForm
+goes to client/components/auth-form.jsx
+Class AuthForm is called with new operator
+constructor method is called
+  super function called with arguememnt props
+  inital state is set for 'username' and 'password' as empty strings
+  ‘this’ is bound to the methods handleChange and handleSubmit using bind()
+render method is called
+  'action' is destructured from props object
+  'handleChange' and 'handleSubmit' are destructured from this class
+  if action is stricly equal to 'sign-up' variable named alternateActionHref is assigned value of '#sign-in'
+    if not, then is assigned '#sign-up'
+  if action is stricly equal to 'sign-up' variable named alternateActionText is assigned value of 'Sign in instead'
+    if not, then is assigned 'Register now'
+  if action is stricly equal to 'sign-up' variable named submitButtonText is assigned value of 'Register'
+    if not, then is assigned 'Log In'
+  return statement
+    react element type form with prop onSubmit=handleSubmit
+    react element type input with label element,'Username'
+      has prop onChange=handleChange
+    react element type input with label element,'Password'
+      has prop onChange=handleChange
+    react element type anchor
+      has prop href=alternateActionHref
+      has child of JS expression alternatActionText
+    react element type button
+      has child of JS expresssion submitButtonText
