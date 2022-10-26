@@ -4,7 +4,7 @@ export default class Accordion extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isClicked: []
+      openIndex: null
     };
 
     this.handleClick = this.handleClick.bind(this);
