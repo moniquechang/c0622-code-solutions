@@ -5,7 +5,6 @@ export default class Carousel extends React.Component {
     super(props);
     this.state = {
       imageIndex: 0,
-      images: this.props.images,
       intervalId: null
     };
 
@@ -27,7 +26,7 @@ export default class Carousel extends React.Component {
   }
 
   createProgressCircles() {
-    return (this.state.images.map((url, index) => {
+    return (this.props.images.map((url, index) => {
       let circleClass;
       if (index === this.state.imageIndex) {
         circleClass = 'fas fa-circle';
@@ -77,7 +76,7 @@ export default class Carousel extends React.Component {
             <i className='fas fa-angle-left' onClick={this.handleClickLeft}></i>
           </div>
           <div className='column-third text-align-center'>
-            <img src={this.state.images[this.state.imageIndex]}></img>
+            <img src={this.props.images[this.state.imageIndex]}></img>
           </div>
           <div className='column-third display-arrow-right'>
             <i className='fas fa-angle-right' onClick={this.handleClickRight}></i>
